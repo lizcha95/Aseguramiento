@@ -15,24 +15,21 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         [TestCase("cualquierArchivo.sql")]
         [TestCase("cualquierArchivo.exe")]
 
-        public void verificarArchivoExiste(string nombreArchivo)
+        public void PruebaVerificarArchivoExiste(string nombreArchivo)
         {
-            Pregunta Juego1 = new Pregunta();
-            //bool resultado = Juego1.verificarArchivoExiste();
+            Juego Juego1 = new Juego();
+            bool resultado = Juego1.verificarArchivoExiste(nombreArchivo);
             Assert.IsTrue(resultado);
         }
-
-
-
 
         [TestCase("cualquierArchivo.txt")]
         [TestCase("cualquierArchivo.sql")]
         [TestCase("cualquierArchivo.exe")]
 
-        public void ExtensionValida(string nombreArchivo)
+        public void PruebaVerificarExtensionValida(string nombreArchivo)
         {
-            Pruebas_Juego Juego1 = new Pruebas_Juego();
-            bool resultado = Juego1.extensionValida(nombreArchivo);
+            Juego Juego1 = new Juego();
+            bool resultado = Juego1.verificarExtension(nombreArchivo);
             Assert.IsTrue(resultado);
         }
 

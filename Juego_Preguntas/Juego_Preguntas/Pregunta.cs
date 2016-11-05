@@ -6,77 +6,77 @@ using System.Threading.Tasks;
 
 namespace JuegoPreguntas
 {
-    public class Pregunta
+    public class Juego
     {
         // Funciones que revisan el archivo y su consistencia
 
         // Revisa si el archivo existe en la directorio
-        bool verificarArchivoExiste(string archivo) 
+        public bool verificarArchivoExiste(string archivo)  
         {
             throw new NotImplementedException();
         }
 
-        bool verificarExtension(string archivo)
+        public bool verificarExtension(string archivo)
         {
             throw new NotImplementedException();
         }
-        void leerArchivo(string nombreArchivo)
+        public void leerArchivo(string nombreArchivo)
         {
             throw new NotImplementedException();
         }
-        bool verificarTamanoNombreArchivo()
+        public bool verificarTamanoNombreArchivo()
         {
             throw new NotImplementedException();
         }
-        bool verificarTamanoArchivo(string archivo)
+        public bool verificarTamanoArchivo(string archivo)
         {
             throw new NotImplementedException();
         }
 
         // Funciones que verifican que la estructura de las preguntas esté correcta
-        bool verificarEstructuraPreguntas(string archivo)
+        public bool verificarEstructuraPreguntas(string archivo)
         {
             throw new NotImplementedException();
         }
-        int cantidadPreguntas()
+        public int cantidadPreguntas()
         {
             throw new NotImplementedException();
         }
 
         // Funciones de interacción del usuario con 
-        bool verificarNumIngresado(int num)
+        public bool verificarNumIngresado(int num)
         {
             throw new NotImplementedException();
         }
-        void eliminarPregunta(int idPregunta) 
+        public void eliminarPregunta(int idPregunta) 
         {
             throw new NotImplementedException();
         }
-        void editarPregunta(int idPregunta, Pregunta pregunta)
+        public void editarPregunta(int idPregunta, Juego pregunta)
         {
             throw new NotImplementedException();
         }
-        void agregarPregunta(Pregunta pregunta)
+        public void agregarPregunta(Juego pregunta)
         {
             throw new NotImplementedException();
         }
-        bool verificarPreguntaExiste(int idPregunta)
+        public bool verificarPreguntaExiste(int idPregunta)
         {
             throw new NotImplementedException();
         }
-        int sumarPuntaje()
+        public int sumarPuntaje()
         {
             throw new NotImplementedException();
         }
-        int restarPuntaje()
+        public int restarPuntaje()
         {
             throw new NotImplementedException();
         }
-        bool verificarRespuesta(int idPregunta, int respuesta)
+        public bool verificarRespuesta(int idPregunta, int respuesta)
         {
             throw new NotImplementedException();
         }
-        int incrementarDificultad()
+        public int incrementarDificultad()
         {
             throw new NotImplementedException();
         }
