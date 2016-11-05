@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pruebas_Programa_Preguntas.Tests1
+namespace Pruebas_Unidad_Juego_Preguntas.Tests1
 {
     [TestFixture]
     public class TestClass
