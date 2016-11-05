@@ -1,4 +1,4 @@
-﻿using Juego_Preguntas;
+﻿using JuegoPreguntas;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,20 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
     [TestFixture]
     public class TestClass
     {
+        [TestCase("cualquierArchivo.txt")]
+        [TestCase("cualquierArchivo.sql")]
+        [TestCase("cualquierArchivo.exe")]
+
+        public void verificarArchivoExiste(string nombreArchivo)
+        {
+            Pregunta Juego1 = new Pregunta();
+            //bool resultado = Juego1.verificarArchivoExiste();
+            Assert.IsTrue(resultado);
+        }
+
+
+
+
         [TestCase("cualquierArchivo.txt")]
         [TestCase("cualquierArchivo.sql")]
         [TestCase("cualquierArchivo.exe")]
