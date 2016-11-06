@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Juego_Preguntas;
 
 namespace JuegoPreguntas
 {
-    public class Juego
+    public class Juego : IPreguntas
     {
         // Funciones que revisan el archivo y su consistencia
 
@@ -81,5 +82,19 @@ namespace JuegoPreguntas
             throw new NotImplementedException();
         }
 
+        public void editarPregunta(int idPregunta, EstructuraPregunta pregunta)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void agregarPregunta(EstructuraPregunta pregunta)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool verificarPreguntaExiste(EstructuraPregunta pregunta)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

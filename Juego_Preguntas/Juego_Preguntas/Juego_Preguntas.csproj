@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EstructuraPregunta.cs" />
     <Compile Include="IPreguntas.cs" />
+    <Compile Include="MainClass.cs" />
     <Compile Include="Pregunta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
