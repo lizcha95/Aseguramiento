@@ -96,5 +96,20 @@ namespace JuegoPreguntas
         {
             throw new NotImplementedException();
         }
+
+        public string mostrarSiguientePregunta()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> mostrarRespuestas()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string mostrarPuntuacionFinal()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

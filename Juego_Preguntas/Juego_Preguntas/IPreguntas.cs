@@ -20,16 +20,23 @@ namespace JuegoPreguntas
         bool verificarEstructuraPreguntas(string archivo);
         int cantidadPreguntas();
 
-        //interaccion de usuario
-        bool verificarNumIngresado(int num);
-        void eliminarPregunta(int idPregunta); // try catch si pregunta es invalida
-        void editarPregunta(int idPregunta, EstructuraPregunta pregunta); 
+        //administracion de preguntas
         void agregarPregunta(EstructuraPregunta pregunta);
+        void editarPregunta(int idPregunta, EstructuraPregunta pregunta);
+        void eliminarPregunta(int idPregunta); // try catch si pregunta es invalida
+
+        //interaccion de usuario
         bool verificarPreguntaExiste(int idPregunta);
         bool verificarPreguntaExiste(EstructuraPregunta pregunta);
+
+        string mostrarSiguientePregunta();
+        List<string> mostrarRespuestas();
+        bool verificarNumIngresado(int num);
+        bool verificarRespuesta(int idPregunta, int respuesta);
+
         int sumarPuntaje();
         int restarPuntaje();
-        bool verificarRespuesta(int idPregunta, int respuesta);
         int incrementarDificultad();
+        string mostrarPuntuacionFinal();
     }
 }
