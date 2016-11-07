@@ -1,4 +1,5 @@
 ﻿using JuegoPreguntas;
+using Juego_Preguntas;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -82,5 +83,24 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
             Assert.IsFalse(resultado);
         }
 
+        [Test]
+
+        public void PruebaVerificarEstructuraPreguntas_EstructuraBuena_RetornaTrue()
+        {
+            Preguntas PreguntaPruebas = new Preguntas();
+            Juego Juego1 = new Juego();
+            bool resultado = Juego1.verificarEstructuraPreguntas(PreguntaPruebas);
+            Assert.IsTrue(resultado);
+        }
+
+        [Test]
+
+        public void PruebaVerificarEstructuraPreguntas_EstructuraMala_RetornaFalse()
+        {
+            string PreguntaPruebas = "Este es un string de prueba";
+            Juego Juego1 = new Juego();
+            bool resultado = Juego1.verificarEstructuraPreguntas(PreguntaPruebas);
+            Assert.IsFalse(resultado);
+        }
     }
 }

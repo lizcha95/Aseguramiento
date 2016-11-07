@@ -17,8 +17,8 @@ namespace JuegoPreguntas
         bool verificarTamanoArchivo(int tamano);
 
         //verificar estructura preguntas
-        bool verificarEstructuraPreguntas(string archivo);
-        int cantidadPreguntas();
+        bool verificarEstructuraPreguntas(object archivo);
+        int cantidadPreguntas(int cantidadPreguntas);
 
         //administracion de preguntas
         void agregarPregunta(EstructuraPregunta pregunta);

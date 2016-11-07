@@ -58,13 +58,16 @@ namespace JuegoPreguntas
         }
 
         // Funciones que verifican que la estructura de las preguntas esté correcta
-        public bool verificarEstructuraPreguntas(string archivo)
+        public bool verificarEstructuraPreguntas(object archivo)
         {
-            throw new NotImplementedException();
+            if (archivo.GetType() == typeof(Preguntas))
+                return true;
+            return false;
         }
-        public int cantidadPreguntas()
+
+        public int cantidadPreguntas(int cantidadPreguntasSolicitadas)
         {
-            throw new NotImplementedException();
+            return cantidadPreguntasSolicitadas;
         }
 
         // Funciones de interacción del usuario con 
