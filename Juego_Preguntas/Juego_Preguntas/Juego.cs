@@ -7,31 +7,54 @@ using Juego_Preguntas;
 
 namespace JuegoPreguntas
 {
-    public class Juego : IPreguntas
+    public class Juego : IJuego
     {
+        private readonly int MAX_SIZE = (5 * 1024 * 1024);
+
         // Funciones que revisan el archivo y su consistencia
 
         // Revisa si el archivo existe en la directorio
         public bool verificarArchivoExiste(string archivo)  
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(archivo))
+                throw new ArgumentNullException();
+            //TODO implementar funcion de buscar archivo
+            return true;
         }
 
         public bool verificarExtension(string archivo)
         {
-            throw new NotImplementedException();
+            if (!archivo.EndsWith(".txt"))
+                return false;
+
+            //TODO verificar
+            return true;
         }
-        public void leerArchivo(string nombreArchivo)
+
+        public Preguntas leerArchivo(string nombreArchivo)
         {
-            throw new NotImplementedException();
+            //TODO implementar funcion de leer archivo
+            return new Preguntas();
         }
-        public bool verificarTamanoNombreArchivo()
+
+        public bool verificarTamanoNombreArchivo(string nombreArchivo)
         {
-            throw new NotImplementedException();
+            //TODO implementar funcion de verificar tamano del nombre del archivo
+            if (nombreArchivo.Length > 100)
+                return false;
+
+            return true;
         }
-        public bool verificarTamanoArchivo(string archivo)
+
+        /// <summary>
+        /// Verifica tamano de archivo, no puede ser mayor a 5 Mb
+        /// </summary>
+        public bool verificarTamanoArchivo(int tamano)
         {
-            throw new NotImplementedException();
+            if (tamano > MAX_SIZE)
+                return false;
+            //TODO implementar funcion de verificar tamano del archivo
+            return true;
         }
 
         // Funciones que verifican que la estructura de las preguntas esté correcta

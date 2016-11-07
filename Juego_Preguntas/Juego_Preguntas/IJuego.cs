@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace JuegoPreguntas
 {
-    interface IPreguntas
+    interface IJuego
     {
         //archivo
         bool verificarArchivoExiste(string archivo); // Revisa si el archivo existe en la directorio
         bool verificarExtension(string archivo);
-        void leerArchivo(string nombreArchivo);
-        bool verificarTamanoNombreArchivo();
-        bool verificarTamanoArchivo(string archivo);
+        Preguntas leerArchivo(string nombreArchivo);
+        bool verificarTamanoNombreArchivo(string nombreArchivo);
+        bool verificarTamanoArchivo(int tamano);
 
         //verificar estructura preguntas
         bool verificarEstructuraPreguntas(string archivo);

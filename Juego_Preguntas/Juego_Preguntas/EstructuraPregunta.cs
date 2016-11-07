@@ -30,11 +30,4 @@ namespace Juego_Preguntas
             Respuestas = dist;
         }
     }
-
-    public class EstructuraRespuesta
-    {
-        public int NumeroRespuesta { get; set; }
-        public string Respuesta { get; set; }
-        public bool Correcta { get; set; } 
-    }
 }
