@@ -11,37 +11,75 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
     [TestFixture]
     public class TestClass
     {
-        [TestCase("cualquierArchivo.txt")]
-        [TestCase("cualquierArchivo.sql")]
-        [TestCase("cualquierArchivo.exe")]
+        [TestCase("preguntasSobreCiencia.txt")]
+        [TestCase("preguntasSobreHistoria.txt")]
 
-        public void PruebaVerificarArchivoExiste(string nombreArchivo)
+        public void PruebaVerificarArchivo_ArchivoExiste_RetornaTrue(string nombreArchivo)
         {
             Juego Juego1 = new Juego();
             bool resultado = Juego1.verificarArchivoExiste(nombreArchivo);
             Assert.IsTrue(resultado);
         }
 
-        [TestCase("cualquierArchivo.txt")]
-        [TestCase("cualquierArchivo.sql")]
-        [TestCase("cualquierArchivo.exe")]
+        [TestCase("")]
 
-        public void PruebaVerificarExtensionValida(string nombreArchivo)
+        public void PruebaVerificarArchivo_ArchivoNoExiste_RetornaException(string nombreArchivo)
+        {
+            Juego Juego1 = new Juego();
+            Assert.Throws<ArgumentNullException>(() => Juego1.verificarArchivoExiste(nombreArchivo));
+        }
+
+        [TestCase("preguntasSobreCulturaGeneral.txt")]
+
+        public void PruebaVerificarExtension_ExtensionBuena_RetornaTrue(string nombreArchivo)
         {
             Juego Juego1 = new Juego();
             bool resultado = Juego1.verificarExtension(nombreArchivo);
             Assert.IsTrue(resultado);
         }
 
-        [TestCase("cualquierArchivoConUnTamanoMuyMuyGrandeGrandeGrandeGrandeGrande.txt")]
-        [TestCase("cualquierArchivo.sql")]
-        [TestCase("cualquierArchivo.exe")]
+        [TestCase("preguntasSobreHumanidad.sql")]
 
-        public void NombreValido(string nombreArchivo)
+        public void PruebaVerificarExtension_ExtensionMala_RetornaFalse(string nombreArchivo)
         {
-            /*Pruebas_Juego Juego1 = new Pruebas_Juego();
-            bool resultado = Juego1.tamanoNombre(nombreArchivo);
-            Assert.IsTrue(resultado);*/
+            Juego Juego1 = new Juego();
+            bool resultado = Juego1.verificarExtension(nombreArchivo);
+            Assert.IsFalse(resultado);
+        }
+
+        [TestCase("preguntasSobreAnimales.txt")]
+
+        public void PruebaVerificarLeerArchivo_RetornaObjetoPreguntas(string nombreArchivo)
+        {
+            Juego Juego1 = new Juego();
+            Assert.IsInstanceOf<Juego_Preguntas.Preguntas>(Juego1.leerArchivo(nombreArchivo));
+        }
+
+        [TestCase("preguntasSobreEraPaleosóica2ParaNiñosDeTercerGrado.txt")]
+
+        public void PruebaVerificarTamanoNombreArchivo_TamanoNombreMalo_RetornaFalse(string nombreArchivo)
+        {
+            Juego Juego1 = new Juego();
+            bool resultado = Juego1.verificarTamanoNombreArchivo(nombreArchivo);
+            Assert.IsFalse(resultado);
+        }
+
+        [TestCase(1024)]
+
+        public void PruebaVerificarTamanoArchivo_TamanoBueno_RetornaTrue(int tamano)
+        {
+            Juego Juego1 = new Juego();
+            bool resultado = Juego1.verificarTamanoArchivo(tamano);
+            Assert.IsTrue(resultado);
+        }
+
+        [TestCase(5242890)]
+
+        public void PruebaVerificarTamanoArchivo_TamanoMalo_RetornaFalse(int tamano)
+        {
+            Juego Juego1 = new Juego();
+            bool resultado = Juego1.verificarTamanoArchivo(tamano);
+            Assert.IsFalse(resultado);
         }
 
     }

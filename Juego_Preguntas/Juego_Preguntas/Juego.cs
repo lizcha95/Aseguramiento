@@ -40,7 +40,7 @@ namespace JuegoPreguntas
         public bool verificarTamanoNombreArchivo(string nombreArchivo)
         {
             //TODO implementar funcion de verificar tamano del nombre del archivo
-            if (nombreArchivo.Length > 100)
+            if (nombreArchivo.Length > 50)
                 return false;
 
             return true;
