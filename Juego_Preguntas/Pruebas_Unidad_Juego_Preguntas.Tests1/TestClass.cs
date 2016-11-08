@@ -102,5 +102,21 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
             bool resultado = Juego1.verificarEstructuraPreguntas(PreguntaPruebas);
             Assert.IsFalse(resultado);
         }
+
+        [TestCase(0, 10)]
+
+        public void PruebaVerificarCantidadPreguntasIngresadas_CantidadCero_RetornaExcepcion(int num, int cantidadPreguntas)
+        {
+            Juego Juego1 = new Juego();
+            Assert.Throws<ArgumentException>(() => Juego1.cantidadPreguntas(num, cantidadPreguntas));
+        }
+
+        [TestCase(10, 5)]
+
+        public void PruebaVerificarCantidadPreguntasIngresadas_CantidadMala_RetornaExcepcion(int num, int cantidadPreguntas)
+        {
+            Juego Juego1 = new Juego();
+            Assert.Throws<IndexOutOfRangeException>(() => Juego1.cantidadPreguntas(num, cantidadPreguntas));
+        }
     }
 }

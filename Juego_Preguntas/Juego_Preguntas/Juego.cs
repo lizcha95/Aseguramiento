@@ -10,6 +10,9 @@ namespace JuegoPreguntas
     public class Juego : IJuego
     {
         private readonly int MAX_SIZE = (5 * 1024 * 1024);
+        int MAX_DIFFICULTY = 10;
+        int PUNTUACION_FINAL = 0;
+        List<Preguntas> PreguntasJuego;
 
         // Funciones que revisan el archivo y su consistencia
 
@@ -62,48 +65,51 @@ namespace JuegoPreguntas
         {
             if (archivo.GetType() == typeof(Preguntas))
                 return true;
+            //TODO implementar función que verifica estructura preguntas
             return false;
         }
 
-        public int cantidadPreguntas(int cantidadPreguntasSolicitadas)
+        public int cantidadPreguntas(int cantidadPreguntasSolicitadas, int cantidadPreguntas)
         {
+            if (cantidadPreguntasSolicitadas == 0)
+                throw new ArgumentException();
+            if (cantidadPreguntasSolicitadas >= cantidadPreguntas)
+                throw new IndexOutOfRangeException();
             return cantidadPreguntasSolicitadas;
         }
 
-        // Funciones de interacción del usuario con 
-        public bool verificarNumIngresado(int num)
+        public void eliminarPregunta(Preguntas PreguntaAEliminar) 
         {
-            throw new NotImplementedException();
+            //if (PreguntasJuego ==)
+            if (PreguntasJuego.Contains(PreguntaAEliminar))
+                throw new KeyNotFoundException();
         }
-        public void eliminarPregunta(int idPregunta) 
-        {
-            throw new NotImplementedException();
-        }
+
         public void editarPregunta(int idPregunta, Juego pregunta)
         {
             throw new NotImplementedException();
         }
+
         public void agregarPregunta(Juego pregunta)
         {
             throw new NotImplementedException();
         }
-        public bool verificarPreguntaExiste(int idPregunta)
+
+        public void sumarPuntaje()
         {
-            throw new NotImplementedException();
+            PUNTUACION_FINAL += 1;
         }
-        public int sumarPuntaje()
+
+        public void restarPuntaje()
         {
-            throw new NotImplementedException();
+            PUNTUACION_FINAL -= 1;
         }
-        public int restarPuntaje()
-        {
-            throw new NotImplementedException();
-        }
+
         public bool verificarRespuesta(int idPregunta, int respuesta)
         {
             throw new NotImplementedException();
         }
-        public int incrementarDificultad()
+        public void incrementarDificultad()
         {
             throw new NotImplementedException();
         }
