@@ -168,5 +168,68 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
             Juego1.PreguntasJuego.Add(PreguntaAAgregar);
             Assert.Throws<ArgumentException>(() => Juego1.agregarPregunta(PreguntaAAgregar));
         }
+
+        [Test]
+        public void PruebaIncrementarDificultad_Retorna1()
+        {
+            Juego Juego1 = new Juego();
+            Juego1.incrementarDificultad();
+            Assert.AreEqual(Juego1.MAX_DIFFICULTY, 1);
+        }
+
+        [Test]
+        public void PruebaPuntajeFinalInicial_Retorna0()
+        {
+            Juego Juego1 = new Juego();
+            Assert.AreEqual(Juego1.PUNTUACION_FINAL, 0);
+        }
+
+        [Test]
+        public void PruebaPuntajeFinal_Mas4_Retorna4()
+        {
+            Juego Juego1 = new Juego();
+            Juego1.PUNTUACION_FINAL += 4;
+            Assert.AreEqual(Juego1.PUNTUACION_FINAL, 4);
+        }
+
+        [Test]
+        public void PruebaEditarPregunta_RetornaExcepcion()
+        {
+            Juego Juego1 = new Juego();
+            EstructuraPregunta preguntaAEditar = Juego1.crearPregunta();
+            Assert.Throws<ArgumentException>(() => Juego1.editarPregunta(0, preguntaAEditar));
+        }
+
+        [Test]
+        public void PruebaAgregarPregunta_RetornaExcepcion()
+        {
+            Juego Juego1 = new Juego();
+            EstructuraPregunta PreguntaAAgregar = Juego1.crearPregunta();
+            Assert.Throws<ArgumentException>(() => Juego1.agregarPregunta(PreguntaAAgregar));
+        }
+
+        [Test]
+        public void PruebaVerificarPreguntaExiste_ListaExiste_RetornaTrue()
+        {
+            Juego Juego1 = new Juego();
+            EstructuraPregunta PreguntaAAgregar = Juego1.crearPregunta();
+            Juego1.agregarPregunta(PreguntaAAgregar);
+            Assert.IsTrue(Juego1.verificarPreguntaExiste(PreguntaAAgregar));
+        }
+
+        [Test]
+        public void PruebaVerificarPreguntaExiste_ListaExiste_RetornaFalse()
+        {
+            Juego Juego1 = new Juego();
+            EstructuraPregunta PreguntaAAgregar = Juego1.crearPregunta();
+            Assert.IsTrue(Juego1.verificarPreguntaExiste(PreguntaAAgregar));
+        }
+
+        [Test]
+        public void PruebaMostrarRespuesta_RetornaExcepcion()
+        {
+            Juego Juego1 = new Juego();
+            Assert.Throws<ArgumentException>(() => Juego1.mostrarRespuestas());
+        }
     }
 }

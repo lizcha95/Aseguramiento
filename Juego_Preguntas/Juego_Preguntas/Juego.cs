@@ -10,9 +10,9 @@ namespace JuegoPreguntas
     public class Juego : IJuego
     {
         private readonly int MAX_SIZE = (5 * 1024 * 1024);
-        int MAX_DIFFICULTY = 1;
-        int PUNTUACION_FINAL = 0;
-        int SIG_PREGUNTA = 0;
+        public int MAX_DIFFICULTY = 1;
+        public int PUNTUACION_FINAL = 0;
+        public int SIG_PREGUNTA = 0;
         public List<Preguntas> PreguntasJuego = new List<Preguntas>();
 
        
@@ -173,6 +173,7 @@ namespace JuegoPreguntas
             List<string> respuestas = new List<string>();
             for (int i = 0; i < PreguntasJuego.Count; i++)
             {
+                throw new ArgumentException();
                 //TODO implementar la función mostrar respuestas
             }
             return respuestas;
@@ -182,5 +183,12 @@ namespace JuegoPreguntas
         {
             return PUNTUACION_FINAL;
         }
+
+        public EstructuraPregunta crearPregunta()
+        {
+            return new EstructuraPregunta();
+        }
     }
+
+    
 }
