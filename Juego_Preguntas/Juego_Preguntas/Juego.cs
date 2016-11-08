@@ -10,8 +10,9 @@ namespace JuegoPreguntas
     public class Juego : IJuego
     {
         private readonly int MAX_SIZE = (5 * 1024 * 1024);
-        int MAX_DIFFICULTY = 10;
+        int MAX_DIFFICULTY = 1;
         int PUNTUACION_FINAL = 0;
+        int SIG_PREGUNTA = 0;
         public List<Preguntas> PreguntasJuego = new List<Preguntas>();
 
        
@@ -116,41 +117,70 @@ namespace JuegoPreguntas
 
         public bool verificarRespuesta(int idPregunta, int respuesta)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < PreguntasJuego.Count; i++)
+            {
+                for (int j = 0; j < PreguntasJuego[i].PreguntasCargadas.Count; j++)
+                {
+                    if (PreguntasJuego[i].PreguntasCargadas[j].IdPregunta == idPregunta)
+                        return true;
+                    //TODO implementar la función verificar respuesta
+                }
+            }
+            return false;
         }
         public void incrementarDificultad()
         {
-            throw new NotImplementedException();
+            MAX_DIFFICULTY += 1;
         }
 
         public void editarPregunta(int idPregunta, EstructuraPregunta pregunta)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < PreguntasJuego.Count; i++)
+            {
+                for (int j = 0; j < PreguntasJuego[i].PreguntasCargadas.Count; j++)
+                {
+                    throw new ArgumentException();
+                    //TODO implementar la función editar Pregunta
+                }
+            }
         }
 
         public void agregarPregunta(EstructuraPregunta pregunta)
         {
-            throw new NotImplementedException();
+            if (!PreguntasJuego[0].PreguntasCargadas.Contains(pregunta))
+                throw new ArgumentException();
+            //TODO implementar la función agregar Pregunta  
         }
 
         public bool verificarPreguntaExiste(EstructuraPregunta pregunta)
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < PreguntasJuego.Count; i++)
+            {
+                if (PreguntasJuego[i].PreguntasCargadas.Contains(pregunta))
+                    return true;
+            }
+            return false;
         }
 
         public string mostrarSiguientePregunta()
         {
-            throw new NotImplementedException();
+            int PreguntasActuales = 0;
+            return PreguntasJuego[PreguntasActuales].PreguntasCargadas[SIG_PREGUNTA].Pregunta;
         }
 
         public List<string> mostrarRespuestas()
         {
-            throw new NotImplementedException();
+            List<string> respuestas = new List<string>();
+            for (int i = 0; i < PreguntasJuego.Count; i++)
+            {
+                //TODO implementar la función mostrar respuestas
+            }
+            return respuestas;
         }
 
-        public string mostrarPuntuacionFinal()
+        public int mostrarPuntuacionFinal()
         {
-            throw new NotImplementedException();
+            return PUNTUACION_FINAL;
         }
     }
 }
