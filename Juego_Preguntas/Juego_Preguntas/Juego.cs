@@ -12,8 +12,9 @@ namespace JuegoPreguntas
         private readonly int MAX_SIZE = (5 * 1024 * 1024);
         int MAX_DIFFICULTY = 10;
         int PUNTUACION_FINAL = 0;
-        List<Preguntas> PreguntasJuego;
+        public List<Preguntas> PreguntasJuego = new List<Preguntas>();
 
+       
         // Funciones que revisan el archivo y su consistencia
 
         // Revisa si el archivo existe en la directorio
@@ -80,19 +81,27 @@ namespace JuegoPreguntas
 
         public void eliminarPregunta(Preguntas PreguntaAEliminar) 
         {
-            //if (PreguntasJuego ==)
-            if (PreguntasJuego.Contains(PreguntaAEliminar))
+            if (PreguntasJuego.Count == 0)
+                throw new NullReferenceException();
+            if (!PreguntasJuego.Contains(PreguntaAEliminar))
                 throw new KeyNotFoundException();
+            //TODO implementar la función eliminar Pregunta        
         }
 
-        public void editarPregunta(int idPregunta, Juego pregunta)
+        public void editarPregunta(Preguntas PreguntaAEditar)
         {
-            throw new NotImplementedException();
+            if (PreguntasJuego.Count == 0)
+                throw new NullReferenceException();
+            if (!PreguntasJuego.Contains(PreguntaAEditar))
+                throw new KeyNotFoundException();
+            //TODO implementar la función editar Pregunta               
         }
 
-        public void agregarPregunta(Juego pregunta)
+        public void agregarPregunta(Preguntas PreguntaAAgregar)
         {
-            throw new NotImplementedException();
+            if (PreguntasJuego.Contains(PreguntaAAgregar))
+                throw new ArgumentException();
+            //TODO implementar la función agregar Pregunta  
         }
 
         public void sumarPuntaje()

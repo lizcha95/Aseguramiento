@@ -118,5 +118,55 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
             Juego Juego1 = new Juego();
             Assert.Throws<IndexOutOfRangeException>(() => Juego1.cantidadPreguntas(num, cantidadPreguntas));
         }
+
+        [Test]
+
+        public void PruebaVerificarEliminarPregunta_ListaPreguntasVacia_RetornaExcepcion()
+        {
+            Juego Juego1 = new Juego();
+            Preguntas PreguntaAEliminar = new Preguntas();
+            Assert.Throws<NullReferenceException>(() => Juego1.eliminarPregunta(PreguntaAEliminar));
+        }
+
+        [Test]
+
+        public void PruebaVerificarEliminarPregunta_PreguntaNoExisteEnLista_RetornaExcepcion()
+        {
+            Juego Juego1 = new Juego();
+            Preguntas PreguntaAEliminar = new Preguntas();
+            Preguntas PreguntaPrueba = new Preguntas();
+            Juego1.PreguntasJuego.Add(PreguntaPrueba);
+            Assert.Throws<KeyNotFoundException>(() => Juego1.eliminarPregunta(PreguntaAEliminar));
+        }
+
+        [Test]
+
+        public void PruebaVerificarEditarPregunta_ListaPreguntasVacia_RetornaExcepcion()
+        {
+            Juego Juego1 = new Juego();
+            Preguntas PreguntaAEditar = new Preguntas();
+            Assert.Throws<NullReferenceException>(() => Juego1.eliminarPregunta(PreguntaAEditar));
+        }
+
+        [Test]
+
+        public void PruebaVerificarEditarPregunta_PreguntaNoExisteEnLista_RetornaExcepcion()
+        {
+            Juego Juego1 = new Juego();
+            Preguntas PreguntaAEditar = new Preguntas();
+            Preguntas PreguntaPrueba = new Preguntas();
+            Juego1.PreguntasJuego.Add(PreguntaPrueba);
+            Assert.Throws<KeyNotFoundException>(() => Juego1.eliminarPregunta(PreguntaAEditar));
+        }
+
+        [Test]
+
+        public void PruebaVerificarAgregarPregunta_PreguntaYaExisteEnLista_RetornaExcepcion()
+        {
+            Juego Juego1 = new Juego();
+            Preguntas PreguntaAAgregar = new Preguntas();
+            Juego1.PreguntasJuego.Add(PreguntaAAgregar);
+            Assert.Throws<ArgumentException>(() => Juego1.agregarPregunta(PreguntaAAgregar));
+        }
     }
 }

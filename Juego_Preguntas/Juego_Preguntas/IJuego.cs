@@ -22,7 +22,7 @@ namespace JuegoPreguntas
 
         //administracion de preguntas
         void agregarPregunta(EstructuraPregunta pregunta);
-        void editarPregunta(int idPregunta, EstructuraPregunta pregunta);
+        void editarPregunta(Preguntas PreguntaAEditar);
         void eliminarPregunta(Preguntas PreguntaAEliminar); // try catch si pregunta es invalida
 
         //interaccion de usuario
