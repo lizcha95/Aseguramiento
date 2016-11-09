@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Juego_Preguntas.Controller;
+using Juego_Preguntas.UI;
 
 namespace Pruebas_Unidad_Juego_Preguntas.Tests1
 {
@@ -123,113 +125,113 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
 
         public void PruebaVerificarEliminarPregunta_ListaPreguntasVacia_RetornaExcepcion()
         {
-            Juego Juego1 = new Juego();
+            Administracion Admin = new Administracion();
             Preguntas PreguntaAEliminar = new Preguntas();
-            Assert.Throws<NullReferenceException>(() => Juego1.eliminarPregunta(PreguntaAEliminar));
+            Assert.Throws<NullReferenceException>(() => Admin.eliminarPregunta(PreguntaAEliminar));
         }
 
         [Test]
 
         public void PruebaVerificarEliminarPregunta_PreguntaNoExisteEnLista_RetornaExcepcion()
         {
-            Juego Juego1 = new Juego();
+            Administracion Admin = new Administracion();
             Preguntas PreguntaAEliminar = new Preguntas();
             Preguntas PreguntaPrueba = new Preguntas();
-            Juego1.PreguntasJuego.Add(PreguntaPrueba);
-            Assert.Throws<KeyNotFoundException>(() => Juego1.eliminarPregunta(PreguntaAEliminar));
+            Run.Instance.Add(PreguntaPrueba);
+            Assert.Throws<KeyNotFoundException>(() => Admin.eliminarPregunta(PreguntaAEliminar));
         }
 
         [Test]
 
         public void PruebaVerificarEditarPregunta_ListaPreguntasVacia_RetornaExcepcion()
         {
-            Juego Juego1 = new Juego();
+            Administracion Admin = new Administracion();
             Preguntas PreguntaAEditar = new Preguntas();
-            Assert.Throws<NullReferenceException>(() => Juego1.eliminarPregunta(PreguntaAEditar));
+            Assert.Throws<NullReferenceException>(() => Admin.eliminarPregunta(PreguntaAEditar));
         }
 
         [Test]
 
         public void PruebaVerificarEditarPregunta_PreguntaNoExisteEnLista_RetornaExcepcion()
         {
-            Juego Juego1 = new Juego();
+            Administracion Admin = new Administracion();
             Preguntas PreguntaAEditar = new Preguntas();
             Preguntas PreguntaPrueba = new Preguntas();
-            Juego1.PreguntasJuego.Add(PreguntaPrueba);
-            Assert.Throws<KeyNotFoundException>(() => Juego1.eliminarPregunta(PreguntaAEditar));
+            Run.Instance.Add(PreguntaPrueba);
+            Assert.Throws<KeyNotFoundException>(() => Admin.eliminarPregunta(PreguntaAEditar));
         }
 
         [Test]
 
         public void PruebaVerificarAgregarPregunta_PreguntaYaExisteEnLista_RetornaExcepcion()
         {
-            Juego Juego1 = new Juego();
+            Administracion Admin = new Administracion();
             Preguntas PreguntaAAgregar = new Preguntas();
-            Juego1.PreguntasJuego.Add(PreguntaAAgregar);
-            Assert.Throws<ArgumentException>(() => Juego1.agregarPregunta(PreguntaAAgregar));
+            Run.Instance.Add(PreguntaAAgregar);
+            Assert.Throws<ArgumentException>(() => Admin.agregarPregunta(PreguntaAAgregar));
         }
 
         [Test]
         public void PruebaIncrementarDificultad_Retorna1()
         {
-            Juego Juego1 = new Juego();
-            Juego1.incrementarDificultad();
-            Assert.AreEqual(Juego1.MAX_DIFFICULTY, 1);
+            Interaccion interaccion = new Interaccion();
+            interaccion.incrementarDificultad();
+            Assert.AreEqual(interaccion.DIFFICULTY, 1);
         }
 
         [Test]
         public void PruebaPuntajeFinalInicial_Retorna0()
         {
-            Juego Juego1 = new Juego();
-            Assert.AreEqual(Juego1.PUNTUACION_FINAL, 0);
+            Interaccion interaccion = new Interaccion();
+            Assert.AreEqual(interaccion.PUNTUACION_FINAL, 0);
         }
 
         [Test]
         public void PruebaPuntajeFinal_Mas4_Retorna4()
         {
-            Juego Juego1 = new Juego();
-            Juego1.PUNTUACION_FINAL += 4;
-            Assert.AreEqual(Juego1.PUNTUACION_FINAL, 4);
+            Interaccion interaccion = new Interaccion();
+            interaccion.PUNTUACION_FINAL += 4;
+            Assert.AreEqual(interaccion.PUNTUACION_FINAL, 4);
         }
 
         [Test]
         public void PruebaEditarPregunta_RetornaExcepcion()
         {
-            Juego Juego1 = new Juego();
-            EstructuraPregunta preguntaAEditar = Juego1.crearPregunta();
-            Assert.Throws<ArgumentException>(() => Juego1.editarPregunta(0, preguntaAEditar));
+            Administracion admin = new Administracion();
+            EstructuraPregunta preguntaAEditar = admin.crearPregunta();
+            Assert.Throws<ArgumentException>(() => admin.editarPregunta(0, preguntaAEditar));
         }
 
         [Test]
         public void PruebaAgregarPregunta_RetornaExcepcion()
         {
-            Juego Juego1 = new Juego();
-            EstructuraPregunta PreguntaAAgregar = Juego1.crearPregunta();
-            Assert.Throws<ArgumentException>(() => Juego1.agregarPregunta(PreguntaAAgregar));
+            Administracion admin = new Administracion();
+            EstructuraPregunta PreguntaAAgregar = admin.crearPregunta();
+            Assert.Throws<ArgumentException>(() => admin.agregarPregunta(PreguntaAAgregar));
         }
 
         [Test]
         public void PruebaVerificarPreguntaExiste_ListaExiste_RetornaTrue()
         {
-            Juego Juego1 = new Juego();
-            EstructuraPregunta PreguntaAAgregar = Juego1.crearPregunta();
-            Juego1.agregarPregunta(PreguntaAAgregar);
-            Assert.IsTrue(Juego1.verificarPreguntaExiste(PreguntaAAgregar));
+            Administracion admin = new Administracion();
+            EstructuraPregunta PreguntaAAgregar = admin.crearPregunta();
+            admin.agregarPregunta(PreguntaAAgregar);
+            Assert.IsTrue(admin.verificarPreguntaExiste(PreguntaAAgregar));
         }
 
         [Test]
         public void PruebaVerificarPreguntaExiste_ListaExiste_RetornaFalse()
         {
-            Juego Juego1 = new Juego();
-            EstructuraPregunta PreguntaAAgregar = Juego1.crearPregunta();
-            Assert.IsTrue(Juego1.verificarPreguntaExiste(PreguntaAAgregar));
+            Administracion admin = new Administracion();
+            EstructuraPregunta PreguntaAAgregar = admin.crearPregunta();
+            Assert.IsTrue(admin.verificarPreguntaExiste(PreguntaAAgregar));
         }
 
         [Test]
         public void PruebaMostrarRespuesta_RetornaExcepcion()
         {
-            Juego Juego1 = new Juego();
-            Assert.Throws<ArgumentException>(() => Juego1.mostrarRespuestas());
+            Interaccion interaccion = new Interaccion();
+            Assert.Throws<ArgumentException>(() => interaccion.mostrarRespuestas());
         }
     }
 }
