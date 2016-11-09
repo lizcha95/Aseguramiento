@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JuegoPreguntas
 {
-    interface IJuego
+    public interface IJuego
     {
         //archivo
         bool verificarArchivoExiste(string archivo); // Revisa si el archivo existe en la directorio

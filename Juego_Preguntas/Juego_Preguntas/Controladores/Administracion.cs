@@ -10,65 +10,79 @@ namespace Juego_Preguntas.Controller
 {
     public class Administracion : IAdministracion
     {
-        List<Preguntas> PreguntasJuego = Run.Instance;
+        Preguntas PreguntasJuego = Run.Instance;
 
-        public EstructuraPregunta crearPregunta()
+        public bool existePregunta(EstructuraPregunta pregunta)
         {
-            return new EstructuraPregunta();
+            bool encontrada = false;
+            if (PreguntasJuego.PreguntasCargadas.Count <= 0)
+                return false;
+
+            foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasCargadas)
+            {
+                if (preg.Pregunta.Equals(pregunta.Pregunta))
+                {
+                    encontrada = true;
+                }
+            }
+            return encontrada;
         }
 
         public void agregarPregunta(EstructuraPregunta pregunta)
         {
-            if (!PreguntasJuego[0].PreguntasCargadas.Contains(pregunta))
+            if (existePregunta(pregunta))
                 throw new ArgumentException();
-            //TODO implementar la función agregar Pregunta  
-        }
 
-        public void agregarPregunta(Preguntas PreguntaAAgregar)
-        {
-            if (PreguntasJuego.Contains(PreguntaAAgregar))
-                throw new ArgumentException();
+            int index = 0;
+            EstructuraPregunta preg = PreguntasJuego.PreguntasCargadas.LastOrDefault<EstructuraPregunta>();
+            if (preg != null)
+                index = preg.IdPregunta;
+
             //TODO implementar la función agregar Pregunta  
+            pregunta.IdPregunta = index;
+            PreguntasJuego.PreguntasCargadas.Add(pregunta);
         }
 
         public void editarPregunta(int idPregunta, EstructuraPregunta pregunta)
         {
-            for (int i = 0; i < PreguntasJuego.Count; i++)
+            bool encontrada = false;
+            foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasCargadas)
             {
-                for (int j = 0; j < PreguntasJuego[i].PreguntasCargadas.Count; j++)
+                if (preg.IdPregunta.Equals(idPregunta))
                 {
-                    throw new ArgumentException();
-                    //TODO implementar la función editar Pregunta
+                    encontrada = true;
+                    //TODO implementar edit
                 }
             }
+            if (!encontrada)
+                throw new NullReferenceException("No existe la pregunta");
+            
         }
 
-        public void editarPregunta(Preguntas PreguntaAEditar)
+        public void eliminarPregunta(EstructuraPregunta PreguntaAEliminar)
         {
-            if (PreguntasJuego.Count == 0)
-                throw new NullReferenceException();
-            if (!PreguntasJuego.Contains(PreguntaAEditar))
-                throw new KeyNotFoundException();
-            //TODO implementar la función editar Pregunta               
-        }
-
-        public void eliminarPregunta(Preguntas PreguntaAEliminar)
-        {
-            if (PreguntasJuego.Count == 0)
-                throw new NullReferenceException();
-            if (!PreguntasJuego.Contains(PreguntaAEliminar))
-                throw new KeyNotFoundException();
-            //TODO implementar la función eliminar Pregunta        
+            bool encontrada = false;
+            foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasCargadas)
+            {
+                if (preg.IdPregunta.Equals(PreguntaAEliminar.IdPregunta))
+                {
+                    encontrada = true;
+                    //TODO implementar eliminar pregunta
+                }
+            }
+            if (!encontrada)
+                throw new KeyNotFoundException("No existe la pregunta");
         }
 
         public bool verificarPreguntaExiste(EstructuraPregunta pregunta)
         {
-            for (int i = 0; i < PreguntasJuego.Count; i++)
+            bool encontrada = false;
+            foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasCargadas)
             {
-                if (PreguntasJuego[i].PreguntasCargadas.Contains(pregunta))
-                    return true;
+                if (preg.IdPregunta.Equals(pregunta.IdPregunta))
+                    encontrada = true;
             }
-            return false;
+            return encontrada;
         }
     }
 }

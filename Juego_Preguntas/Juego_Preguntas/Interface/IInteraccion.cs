@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Juego_Preguntas.Model.Interface
 {
-    interface IInteraccion
+    public interface IInteraccion
     {
         //interaccion de usuario
+        void asignarPreguntasRandom(int cantidadPreguntas); 
+
         string mostrarSiguientePregunta();
-        List<string> mostrarRespuestas();
+        List<string> mostrarRespuestas(int idPregunta);
         bool verificarRespuesta(int idPregunta, int respuesta);
 
         void sumarPuntaje();

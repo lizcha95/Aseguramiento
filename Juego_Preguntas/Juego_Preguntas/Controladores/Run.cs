@@ -8,18 +8,18 @@ namespace Juego_Preguntas.UI
 {
     public class Run
     {
-        private static List<Preguntas> PreguntasJuego;
+        private static Preguntas PreguntasJuego;
 
         private Run()
         { }
 
-        public static List<Preguntas> Instance
+        public static Preguntas Instance
         {
             get
             {
                 if (PreguntasJuego == null)
                 {
-                    PreguntasJuego = new List<Preguntas>();
+                    PreguntasJuego = new Preguntas();
                 }
                 return PreguntasJuego;
             }

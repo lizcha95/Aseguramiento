@@ -14,25 +14,40 @@ namespace Juego_Preguntas.Controller
         public int PUNTUACION_FINAL = 0;
         public int SIG_PREGUNTA = 0;
 
-        List<Preguntas> PreguntasJuego = Run.Instance;
+        Preguntas PreguntasJuego = Run.Instance;
+
+        public void asignarPreguntasRandom(int cantidadPreguntas)
+        {
+            if ((cantidadPreguntas <= 0) || (PreguntasJuego.PreguntasCargadas.Count < cantidadPreguntas))
+                throw new Exception("El jugador debe asignar un numero de respuetas valido");
+
+            //TODO asignar preguntas al jugador
+        }
 
         public string mostrarSiguientePregunta()
         {
-            int PreguntasActuales = 0;
-            return PreguntasJuego[PreguntasActuales].PreguntasCargadas[SIG_PREGUNTA].Pregunta;
+            return PreguntasJuego.PreguntasAMostrar[SIG_PREGUNTA].Pregunta;
         }
 
         public bool verificarRespuesta(int idPregunta, int respuesta)
         {
-            for (int i = 0; i < PreguntasJuego.Count; i++)
+            bool encontrada = false;
+            foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasAMostrar)
             {
-                for (int j = 0; j < PreguntasJuego[i].PreguntasCargadas.Count; j++)
+                if (preg.IdPregunta.Equals(idPregunta))
                 {
-                    if (PreguntasJuego[i].PreguntasCargadas[j].IdPregunta == idPregunta)
+                    encontrada = true;
+                    if (preg.Respuestas.Count-1 < respuesta)
+                        throw new IndexOutOfRangeException("No existe la respuesta");
+                    if (preg.Respuestas[respuesta].Correcta)
+                    {
                         return true;
-                    //TODO implementar la función verificar respuesta
+                    }
                 }
             }
+            if (!encontrada)
+                throw new IndexOutOfRangeException("No existe la pregunta en las mostradas al usuario");
+
             return false;
         }
 
@@ -57,17 +72,21 @@ namespace Juego_Preguntas.Controller
             return PUNTUACION_FINAL;
         }
 
-        public List<string> mostrarRespuestas()
+        public List<string> mostrarRespuestas(int idPregunta)
         {
             List<string> respuestas = new List<string>();
-            for (int i = 0; i < PreguntasJuego.Count; i++)
+            foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasAMostrar)
             {
-                throw new ArgumentException();
-                //TODO implementar la función mostrar respuestas
+                if (preg.IdPregunta.Equals(idPregunta))
+                {
+                    foreach (EstructuraRespuesta res in preg.Respuestas)
+                        respuestas.Add(res.Respuesta);
+                }
             }
+            if (respuestas.Count <= 0)
+                throw new ArgumentException("La pregunta no tiene respuestas que mostrar");
+
             return respuestas;
         }
-
-        
     }
 }

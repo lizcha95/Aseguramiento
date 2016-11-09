@@ -33,7 +33,7 @@ namespace JuegoPreguntas
 
         public Preguntas leerArchivo(string nombreArchivo)
         {
-            //TODO implementar funcion de leer archivo
+            //TODO implementar funcion de leer archivo y cargar preguntas
             return new Preguntas();
         }
 
