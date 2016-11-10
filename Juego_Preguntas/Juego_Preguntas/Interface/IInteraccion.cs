@@ -8,7 +8,7 @@ namespace Juego_Preguntas.Model.Interface
 {
     public interface IInteraccion
     {
-        Preguntas leerArchivo(string nombreArchivo);
+        void leerArchivo(string nombreArchivo);
 
         //interaccion de usuario
         void asignarPreguntasRandom(int cantidadPreguntas); 

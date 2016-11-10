@@ -17,30 +17,39 @@ namespace Juego_Preguntas.Controller
 
         Preguntas PreguntasJuego = Run.Instance;
 
-        public Preguntas leerArchivo(string nombreArchivo)
+        public void leerArchivo(string nombreArchivo)
         {
             Preguntas PreguntasLeidas = new Preguntas();
 
-            if (nombreArchivo.EndsWith(".cvs"))
+            if (nombreArchivo.EndsWith(".csv"))
             {
-                var reader = new StreamReader(File.OpenRead(@"C:\test.csv"));
-                while (!reader.EndOfStream)
+                try
+                { 
+                    var reader = new StreamReader(File.OpenRead(nombreArchivo));
+                    while (!reader.EndOfStream)
+                    {
+                        var linea = reader.ReadLine();
+                        var valor = linea.Split(',');
+                        int idPregunta = Int32.Parse(valor[0]);
+                        int dificultad = Int32.Parse(valor[6]);
+                        if (dificultad > 10)
+                            throw new ArgumentException("Formato de archivo invalido, la dificultad no puede sobrepasar a 10");
+                        EstructuraRespuesta RespuestasLeidas = new EstructuraRespuesta(valor[2], valor[3], valor[4], valor[5]);
+                        EstructuraPregunta Pregunta = new EstructuraPregunta(idPregunta, valor[1], dificultad, RespuestasLeidas);
+                        PreguntasLeidas.PreguntasCargadas.Add(Pregunta);
+                    }
+                }
+                catch (Exception e)
                 {
-                    var linea = reader.ReadLine();
-                    var valor = linea.Split(',');
-                    int idPregunta = Int32.Parse(valor[0]);
-                    int dificultad = Int32.Parse(valor[6]);
-                    EstructuraRespuesta RespuestasLeidas = new EstructuraRespuesta(valor[2], valor[3], valor[4], valor[5]);
-                    EstructuraPregunta Pregunta = new EstructuraPregunta(idPregunta, valor[1], dificultad, RespuestasLeidas);
-                    PreguntasLeidas.PreguntasCargadas.Add(Pregunta);
-                }                
+                    throw new ArgumentException("Formato de archivo invalido");
+                }
             }
             else
             {
                 throw new ArgumentException("Extensión del archivo no válida");
             }
 
-            return PreguntasLeidas;
+            PreguntasJuego = PreguntasLeidas;
         }
 
         public void asignarPreguntasRandom(int cantidadPreguntas)
@@ -51,12 +60,27 @@ namespace Juego_Preguntas.Controller
             {
                 Random rnd = new Random();
                 List<int> random = new List<int>();
-                while (cantidadPreguntas++ != 0)
+                foreach(EstructuraPregunta preg in PreguntasJuego.PreguntasCargadas)
                 {
-                    random.Add(PreguntasJuego.PreguntasCargadas.Count);
+                    random.Add(preg.IdPregunta);
                 }
+                var shuffledpregs = random.OrderBy(a => rnd.Next());
+                int index = 0;
+                List<EstructuraPregunta> preguntasFinales = new List<EstructuraPregunta>();
+                while (index != cantidadPreguntas)
+                {
+                    foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasCargadas)
+                    {
+                        if (preg.IdPregunta == shuffledpregs.ElementAt(index))
+                        {
+                            preguntasFinales.Add(preg);
+                            ++index;
+                        }
+                    }
+                }
+                var pregsByDif = preguntasFinales.OrderBy(p => p.Dificultad);
+                PreguntasJuego.PreguntasAMostrar = pregsByDif.ToList();
             }
-            //TODO asignar preguntas al jugador
         }
 
         public string mostrarSiguientePregunta()
@@ -124,8 +148,14 @@ namespace Juego_Preguntas.Controller
             {
                 if (preg.IdPregunta.Equals(idPregunta))
                 {
-                    foreach (EstructuraRespuesta res in preg.Respuestas)
-                        respuestas.Add(res.Respuesta);
+                    respuestas.Add(preg.Respuesta.Respuesta);
+                    respuestas.Add(preg.Respuesta.Distractor1);
+                    respuestas.Add(preg.Respuesta.Distractor2);
+                    respuestas.Add(preg.Respuesta.Distractor3);
+
+                    Random rnd = new Random();
+                    var shuffledResp = respuestas.OrderBy(a => rnd.Next());
+                    respuestas = shuffledResp.ToList();
                 }
             }
             if (respuestas.Count <= 0)

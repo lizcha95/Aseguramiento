@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Juego_Preguntas.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace Juego_Preguntas
     {
         static void Main(string[] args)
         {
+            Interaccion i = new Interaccion();
+            i.leerArchivo("C:\\Temp\\preguntas.csv");
+            i.asignarPreguntasRandom(5);
         }
     }
 }

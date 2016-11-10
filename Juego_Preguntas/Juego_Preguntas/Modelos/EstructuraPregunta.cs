@@ -8,8 +8,6 @@ namespace Juego_Preguntas
 {
     public class EstructuraPregunta
     {
-        public readonly int MIN_DIFICULTAD = 1;
-        public readonly int MAX_DIFICULTAD = 10;
         public readonly int VALOR = 1; //todas las preguntas valen 1
 
         public int IdPregunta { get; set; }
