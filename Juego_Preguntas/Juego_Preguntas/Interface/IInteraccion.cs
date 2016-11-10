@@ -17,8 +17,7 @@ namespace Juego_Preguntas.Model.Interface
         List<string> mostrarRespuestas(int idPregunta);
         bool verificarRespuesta(int idPregunta, string respuesta);
 
-        void cambiarPuntaje(int idPregunta, int respuesta);
-        void incrementarDificultad();
+        void cambiarPuntaje(int idPregunta, string respuesta);
         int mostrarPuntuacionFinal();
     }
 }

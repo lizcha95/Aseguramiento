@@ -115,7 +115,7 @@ namespace Juego_Preguntas.Controller
             return false;
         }
 
-        public void cambiarPuntaje(int idPregunta, int respuesta)
+        public void cambiarPuntaje(int idPregunta, string respuesta)
         {
             if (verificarRespuesta(idPregunta, respuesta))
             {
@@ -128,14 +128,6 @@ namespace Juego_Preguntas.Controller
             }
         }
 
-        public void incrementarDificultad(int idPregunta, int respuesta)
-        {
-            if (verificarRespuesta(idPregunta, respuesta))
-            {
-                DIFFICULTY += 1;
-            }
-        }
-
         public int mostrarPuntuacionFinal()
         {
             return PUNTUACION_FINAL;
@@ -144,6 +136,7 @@ namespace Juego_Preguntas.Controller
         public List<string> mostrarRespuestas(int idPregunta)
         {
             List<string> respuestas = new List<string>();
+            List<int> resAux = new List<int>();
             foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasAMostrar)
             {
                 if (preg.IdPregunta.Equals(idPregunta))

@@ -14,6 +14,7 @@ namespace Juego_Preguntas
             Interaccion i = new Interaccion();
             i.leerArchivo("C:\\Temp\\preguntas.csv");
             i.asignarPreguntasRandom(5);
+            i.mostrarRespuestas(8);
         }
     }
 }
