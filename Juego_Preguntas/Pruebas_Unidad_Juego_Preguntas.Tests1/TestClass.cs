@@ -1,5 +1,4 @@
-﻿using JuegoPreguntas;
-using Juego_Preguntas;
+﻿using Juego_Preguntas;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -20,9 +19,9 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         [TestCase("preguntasSobreHistoria.txt")]
         public void PruebaVerificarArchivo_ArchivoExiste_RetornaTrue(string nombreArchivo)
         {
-            Juego Juego1 = new Juego();
-            bool resultado = Juego1.verificarArchivoExiste(nombreArchivo);
-            Assert.IsTrue(resultado);
+            Interaccion Juego1 = new Interaccion();
+            Preguntas resultado = Juego1.leerArchivo(nombreArchivo);
+            Assert.Throws<ArgumentException>(() => Juego1.leerArchivo(nombreArchivo));
         }
 
         [TestCase("")]
