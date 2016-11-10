@@ -46,8 +46,16 @@ namespace Juego_Preguntas.Controller
         public void asignarPreguntasRandom(int cantidadPreguntas)
         {
             if ((cantidadPreguntas <= 0) || (PreguntasJuego.PreguntasCargadas.Count < cantidadPreguntas))
-                throw new Exception("El jugador debe asignar un numero de respuetas valido");
-
+                throw new Exception("El jugador debe asignar un numero de preguntas valido");
+            else
+            {
+                Random rnd = new Random();
+                List<int> random = new List<int>();
+                while (cantidadPreguntas++ != 0)
+                {
+                    random.Add(PreguntasJuego.PreguntasCargadas.Count);
+                }
+            }
             //TODO asignar preguntas al jugador
         }
 
