@@ -2,6 +2,7 @@
 using Juego_Preguntas.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,28 @@ namespace Juego_Preguntas.Controller
 
         public Preguntas leerArchivo(string nombreArchivo)
         {
-            //TODO implementar funcion de leer archivo y cargar preguntas
-            return new Preguntas();
+            Preguntas PreguntasLeidas = new Preguntas();
+
+            if (nombreArchivo.EndsWith(".cvs"))
+            {
+                var reader = new StreamReader(File.OpenRead(@"C:\test.csv"));
+                while (!reader.EndOfStream)
+                {
+                    var linea = reader.ReadLine();
+                    var valor = linea.Split(',');
+                    int idPregunta = Int32.Parse(valor[0]);
+                    int dificultad = Int32.Parse(valor[6]);
+                    EstructuraRespuesta RespuestasLeidas = new EstructuraRespuesta(valor[2], valor[3], valor[4], valor[5]);
+                    EstructuraPregunta Pregunta = new EstructuraPregunta(idPregunta, valor[1], dificultad, RespuestasLeidas);
+                    PreguntasLeidas.PreguntasCargadas.Add(Pregunta);
+                }                
+            }
+            else
+            {
+                throw new ArgumentException("Extensión del archivo no válida");
+            }
+
+            return PreguntasLeidas;
         }
 
         public void asignarPreguntasRandom(int cantidadPreguntas)
@@ -50,7 +71,7 @@ namespace Juego_Preguntas.Controller
                 if (preg.IdPregunta.Equals(idPregunta))
                 {
                     encontrada = true;
-                    if (preg.Respuestas.Count-1 < respuesta)
+                    if (preg.Respuesta)
                         throw new IndexOutOfRangeException("No existe la respuesta");
                     if (preg.Respuestas[respuesta].Correcta)
                     {

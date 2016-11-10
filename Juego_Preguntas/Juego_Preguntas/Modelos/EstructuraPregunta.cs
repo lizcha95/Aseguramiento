@@ -15,19 +15,14 @@ namespace Juego_Preguntas
         public int IdPregunta { get; set; }
         public string Pregunta { get; set; }
         public int Dificultad { get; set; }
-        public List<EstructuraRespuesta> Respuestas;
+        public EstructuraRespuesta Respuesta { get; set; }
 
-        public EstructuraPregunta()
-        {
-            Respuestas = new List<EstructuraRespuesta>();
-        }
-
-        public EstructuraPregunta(int id, string preg, int dif, List<EstructuraRespuesta> dist)
+        public EstructuraPregunta(int id, string preg, int dif, EstructuraRespuesta dist)
         {
             IdPregunta = id;
             Pregunta = preg;
             Dificultad = dif;
-            Respuestas = dist;
+            Respuesta = dist;
         }
     }
 }
