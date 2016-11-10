@@ -91,20 +91,25 @@ namespace Juego_Preguntas.Controller
             return false;
         }
 
-        public void sumarPuntaje()
+        public void cambiarPuntaje(int idPregunta, int respuesta)
         {
-            PUNTUACION_FINAL += 1;
+            if (verificarRespuesta(idPregunta, respuesta))
+            {
+                PUNTUACION_FINAL += 1;
+            }
+            else
+            {
+                if (PUNTUACION_FINAL != 0)
+                    PUNTUACION_FINAL -= 1;
+            }
         }
 
-        public void restarPuntaje()
+        public void incrementarDificultad(int idPregunta, int respuesta)
         {
-            PUNTUACION_FINAL -= 1;
-        }
-
-
-        public void incrementarDificultad()
-        {
-            DIFFICULTY += 1;
+            if (verificarRespuesta(idPregunta, respuesta))
+            {
+                DIFFICULTY += 1;
+            }
         }
 
         public int mostrarPuntuacionFinal()
