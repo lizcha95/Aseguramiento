@@ -15,7 +15,7 @@ namespace Juego_Preguntas.Model.Interface
 
         string mostrarSiguientePregunta();
         List<string> mostrarRespuestas(int idPregunta);
-        bool verificarRespuesta(int idPregunta, int respuesta);
+        bool verificarRespuesta(int idPregunta, string respuesta);
 
         void sumarPuntaje();
         void restarPuntaje();

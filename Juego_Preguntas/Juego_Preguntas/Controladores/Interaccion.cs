@@ -71,7 +71,7 @@ namespace Juego_Preguntas.Controller
             throw new NullReferenceException("No hay mas preguntas a mostrar, fin de la lista.");
         }
 
-        public bool verificarRespuesta(int idPregunta, int respuesta)
+        public bool verificarRespuesta(int idPregunta, string respuesta)
         {
             bool encontrada = false;
             foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasAMostrar)
@@ -79,12 +79,10 @@ namespace Juego_Preguntas.Controller
                 if (preg.IdPregunta.Equals(idPregunta))
                 {
                     encontrada = true;
-                    if (preg.Respuesta)
-                        throw new IndexOutOfRangeException("No existe la respuesta");
-                    if (preg.Respuestas[respuesta].Correcta)
-                    {
+                    if (preg.Respuesta.Respuesta.Equals(respuesta))
                         return true;
-                    }
+                    else
+                        return true;
                 }
             }
             if (!encontrada)
