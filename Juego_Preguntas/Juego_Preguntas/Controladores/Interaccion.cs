@@ -136,19 +136,32 @@ namespace Juego_Preguntas.Controller
         public List<string> mostrarRespuestas(int idPregunta)
         {
             List<string> respuestas = new List<string>();
-            List<int> resAux = new List<int>();
+            List<int> resAux = new List<int> { 1, 2, 3, 4};
             foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasAMostrar)
             {
                 if (preg.IdPregunta.Equals(idPregunta))
                 {
-                    respuestas.Add(preg.Respuesta.Respuesta);
-                    respuestas.Add(preg.Respuesta.Distractor1);
-                    respuestas.Add(preg.Respuesta.Distractor2);
-                    respuestas.Add(preg.Respuesta.Distractor3);
-
                     Random rnd = new Random();
-                    var shuffledResp = respuestas.OrderBy(a => rnd.Next());
-                    respuestas = shuffledResp.ToList();
+                    var shuffledResp = resAux.OrderBy(a => rnd.Next());
+                    foreach (int index in shuffledResp)
+                    {
+                        switch (index)
+                        { 
+                            case 1:
+                                respuestas.Add(preg.Respuesta.Respuesta);
+                                continue;
+                            case 2:
+                                respuestas.Add(preg.Respuesta.Distractor1);
+                                continue;
+                            case 3:
+                                respuestas.Add(preg.Respuesta.Distractor2);
+                                continue;
+                            case 4:
+                                respuestas.Add(preg.Respuesta.Distractor3);
+                                continue;
+                        }
+                    }
+                    
                 }
             }
             if (respuestas.Count <= 0)
