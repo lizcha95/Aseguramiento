@@ -15,106 +15,52 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
     [TestFixture]
     public class TestClass
     {
-        [TestCase("preguntasSobreCiencia.txt")]
-        [TestCase("preguntasSobreHistoria.txt")]
-        public void PruebaVerificarArchivo_ArchivoExiste_RetornaTrue(string nombreArchivo)
+        [TestCase("preguntasSobreCiencia.cvs")]
+        [TestCase("preguntasSobreHistoria.cvs")]
+        [TestCase("preguntasSobreGuerrasCiviles.cvs")]
+        public void PruebaVerificarleerArchivo(string nombreArchivo)
         {
-            Interaccion Juego1 = new Interaccion();
-            Preguntas resultado = Juego1.leerArchivo(nombreArchivo);
-            Assert.Throws<ArgumentException>(() => Juego1.leerArchivo(nombreArchivo));
+            Interaccion Interaccion1 = new Interaccion();
+            Assert.Throws<ArgumentException>(() => Interaccion1.leerArchivo(nombreArchivo));
         }
 
-        [TestCase("")]
-        public void PruebaVerificarArchivo_ArchivoNoExiste_RetornaException(string nombreArchivo)
+        [TestCase(3)]
+        [TestCase(0)]
+        [TestCase(8)]
+        public void PruebaVerificarAsignarPreguntasRandom(int cantidadPreguntas)
         {
-            Juego Juego1 = new Juego();
-            Assert.Throws<ArgumentNullException>(() => Juego1.verificarArchivoExiste(nombreArchivo));
-        }
-
-        [TestCase("preguntasSobreCulturaGeneral.txt")]
-        public void PruebaVerificarExtension_ExtensionBuena_RetornaTrue(string nombreArchivo)
-        {
-            Juego Juego1 = new Juego();
-            bool resultado = Juego1.verificarExtension(nombreArchivo);
-            Assert.IsTrue(resultado);
-        }
-
-        [TestCase("preguntasSobreHumanidad.sql")]
-        public void PruebaVerificarExtension_ExtensionMala_RetornaFalse(string nombreArchivo)
-        {
-            Juego Juego1 = new Juego();
-            bool resultado = Juego1.verificarExtension(nombreArchivo);
-            Assert.IsFalse(resultado);
-        }
-
-        [TestCase("preguntasSobreAnimales.txt")]
-        public void PruebaVerificarLeerArchivo_RetornaObjetoPreguntas(string nombreArchivo)
-        {
-            Juego Juego1 = new Juego();
-            Assert.IsInstanceOf<Juego_Preguntas.Preguntas>(Juego1.leerArchivo(nombreArchivo));
-        }
-
-        [TestCase("preguntasSobreEraPaleosóica2ParaNiñosDeTercerGrado.txt")]
-        public void PruebaVerificarTamanoNombreArchivo_TamanoNombreMalo_RetornaFalse(string nombreArchivo)
-        {
-            Juego Juego1 = new Juego();
-            bool resultado = Juego1.verificarTamanoNombreArchivo(nombreArchivo);
-            Assert.IsFalse(resultado);
-        }
-
-        [TestCase(1024)]
-        public void PruebaVerificarTamanoArchivo_TamanoBueno_RetornaTrue(int tamano)
-        {
-            Juego Juego1 = new Juego();
-            bool resultado = Juego1.verificarTamanoArchivo(tamano);
-            Assert.IsTrue(resultado);
-        }
-
-        [TestCase(5242890)]
-        public void PruebaVerificarTamanoArchivo_TamanoMalo_RetornaFalse(int tamano)
-        {
-            Juego Juego1 = new Juego();
-            bool resultado = Juego1.verificarTamanoArchivo(tamano);
-            Assert.IsFalse(resultado);
+            Interaccion Interaccion1 = new Interaccion();
+            Assert.Throws<Exception>(() => Interaccion1.asignarPreguntasRandom(cantidadPreguntas));
         }
 
         [Test]
-        public void PruebaVerificarEstructuraPreguntas_EstructuraBuena_RetornaTrue()
+        public void PruebaVerificarMostrarSiguientePregunta()
         {
-            Preguntas PreguntaPruebas = new Preguntas();
-            Juego Juego1 = new Juego();
-            bool resultado = Juego1.verificarEstructuraPreguntas(PreguntaPruebas);
-            Assert.IsTrue(resultado);
+            Interaccion Interaccion1 = new Interaccion();
+            Assert.Throws<NullReferenceException>(() => Interaccion1.mostrarSiguientePregunta());
         }
 
-        [Test]
-        public void PruebaVerificarEstructuraPreguntas_EstructuraMala_RetornaFalse()
+        [TestCase(1, "Cortázar")]
+        public void PruebaVerificarRespuesta(int idPregunta, string respuesta)
         {
-            string PreguntaPruebas = "Este es un string de prueba";
-            Juego Juego1 = new Juego();
-            bool resultado = Juego1.verificarEstructuraPreguntas(PreguntaPruebas);
-            Assert.IsFalse(resultado);
+            Interaccion Interaccion1 = new Interaccion();
+            Assert.Throws<IndexOutOfRangeException>(() => Interaccion1.verificarRespuesta(idPregunta, respuesta));
         }
 
-        [TestCase(0, 10)]
-        public void PruebaVerificarCantidadPreguntasIngresadas_CantidadCero_RetornaExcepcion(int num, int cantidadPreguntas)
+        [TestCase("preguntasSobreCiencia.cvs")]
+        public void PruebaVerificarExtensionArchivo(string nombreArchivo)
         {
-            Juego Juego1 = new Juego();
-            Assert.Throws<ArgumentException>(() => Juego1.cantidadPreguntas(num, cantidadPreguntas));
+            Interaccion Interaccion1 = new Interaccion();
+            StringAssert.EndsWith(".cvs", nombreArchivo);
         }
 
-        [TestCase(10, 5)]
-        public void PruebaVerificarCantidadPreguntasIngresadas_CantidadMala_RetornaExcepcion(int num, int cantidadPreguntas)
-        {
-            Juego Juego1 = new Juego();
-            Assert.Throws<IndexOutOfRangeException>(() => Juego1.cantidadPreguntas(num, cantidadPreguntas));
-        }
 
         [Test]
         public void PruebaVerificarEliminarPregunta_ListaPreguntasVacia_RetornaExcepcion()
         {
             Administracion Admin = new Administracion();
-            EstructuraPregunta PreguntaAEliminar = new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>());
+            EstructuraRespuesta RespuestaAEliminar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta PreguntaAEliminar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAEliminar);
             Assert.Throws<KeyNotFoundException>(() => Admin.eliminarPregunta(PreguntaAEliminar));
         }
 
@@ -122,8 +68,10 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         public void PruebaVerificarEliminarPregunta_PreguntaNoExisteEnLista_RetornaExcepcion()
         {
             Administracion Admin = new Administracion();
-            EstructuraPregunta PreguntaAEliminar = new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>());
-            EstructuraPregunta PreguntaPrueba = new EstructuraPregunta(2, "Pregunta 2", 2, new List<EstructuraRespuesta>());
+            EstructuraRespuesta RespuestaAEliminar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraRespuesta RespuestaPrueba = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta PreguntaAEliminar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAEliminar);
+            EstructuraPregunta PreguntaPrueba = new EstructuraPregunta(2, "Pregunta 2", 2, RespuestaPrueba);
             Run.Instance.PreguntasCargadas.Add(PreguntaPrueba);
             Assert.Throws<KeyNotFoundException>(() => Admin.eliminarPregunta(PreguntaAEliminar));
         }
@@ -132,7 +80,8 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         public void PruebaVerificarEditarPregunta_ListaPreguntasVacia_RetornaExcepcion()
         {
             Administracion Admin = new Administracion();
-            EstructuraPregunta PreguntaAEditar = new EstructuraPregunta();
+            EstructuraRespuesta RespuestaAEditar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta PreguntaAEditar = new EstructuraPregunta(2, "Pregunta1", 2, RespuestaAEditar);
             Assert.Throws<KeyNotFoundException>(() => Admin.eliminarPregunta(PreguntaAEditar));
         }
 
@@ -140,8 +89,10 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         public void PruebaVerificarEditarPregunta_PreguntaNoExisteEnLista_RetornaExcepcion()
         {
             Administracion Admin = new Administracion();
-            EstructuraPregunta PreguntaAEditar = new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>());
-            EstructuraPregunta PreguntaPrueba = new EstructuraPregunta(2, "Pregunta 2", 1, new List<EstructuraRespuesta>());
+            EstructuraRespuesta RespuestaAEditar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraRespuesta RespuestaPrueba = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta PreguntaAEditar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAEditar);
+            EstructuraPregunta PreguntaPrueba = new EstructuraPregunta(2, "Pregunta 2", 1, RespuestaPrueba);
             Run.Instance.PreguntasCargadas.Add(PreguntaPrueba);
             Assert.Throws<KeyNotFoundException>(() => Admin.eliminarPregunta(PreguntaAEditar));
         }
@@ -151,19 +102,13 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         {
             var admin = Substitute.For<Administracion>();
             var preguntas = Substitute.For<Preguntas>();
-            preguntas.PreguntasCargadas = new List<EstructuraPregunta> { new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>()) };
+            EstructuraRespuesta RespuestaACargar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            preguntas.PreguntasCargadas = new List<EstructuraPregunta> { new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaACargar) };
             Run.Instance.PreguntasCargadas = preguntas.PreguntasCargadas;
 
-            EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>());
+            EstructuraRespuesta RespuestaAAgregar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAAgregar);
             Assert.Throws<ArgumentException>(() => admin.agregarPregunta(PreguntaAAgregar));
-        }
-
-        [Test]
-        public void PruebaIncrementarDificultad_Retorna1()
-        {
-            Interaccion interaccion = new Interaccion();
-            interaccion.incrementarDificultad();
-            Assert.AreEqual(interaccion.DIFFICULTY, 2);
         }
 
         [Test]
@@ -185,7 +130,8 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         public void PruebaEditarPregunta_RetornaExcepcion()
         {
             Administracion admin = new Administracion();
-            EstructuraPregunta preguntaAEditar = new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>());
+            EstructuraRespuesta RespuestaAEditar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta preguntaAEditar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAEditar);
             Assert.Throws<NullReferenceException>(() => admin.editarPregunta(1, preguntaAEditar));
         }
 
@@ -194,7 +140,8 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         {
             var admin = Substitute.For<Administracion>();
             var preguntas = Substitute.For<Preguntas>();
-            EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>());
+            EstructuraRespuesta RespuestaAAgregar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAAgregar);
             Run.Instance.PreguntasCargadas = preguntas.PreguntasCargadas;
             Assert.DoesNotThrow(() => admin.agregarPregunta(PreguntaAAgregar));
             Assert.IsTrue(admin.Received().existePregunta(PreguntaAAgregar));
@@ -204,7 +151,8 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         public void PruebaVerificarPreguntaExiste_ListaExiste_RetornaTrue()
         {
             Administracion admin = new Administracion();
-            EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>());
+            EstructuraRespuesta RespuestaAAgregar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAAgregar);
             admin.agregarPregunta(PreguntaAAgregar);
             Assert.IsTrue(admin.verificarPreguntaExiste(PreguntaAAgregar));
         }
@@ -213,7 +161,8 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         public void PruebaVerificarPreguntaExiste_ListaExiste_RetornaFalse()
         {
             Administracion admin = new Administracion();
-            EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, new List<EstructuraRespuesta>());
+            EstructuraRespuesta RespuestaAAgregar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
+            EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAAgregar);
             Assert.IsTrue(admin.verificarPreguntaExiste(PreguntaAAgregar));
         }
 
@@ -222,6 +171,28 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         {
             Interaccion interaccion = new Interaccion();
             Assert.Throws<ArgumentException>(() => interaccion.mostrarRespuestas(numeroPregunta));
+        }
+
+        [Test]
+        public void PruebaVerificarIncrementoPuntaje()
+        {
+            Interaccion Interaccion = new Interaccion();
+            EstructuraRespuesta respuesta = new EstructuraRespuesta("respuesta", "distractor", "distractor", "distractor");
+            EstructuraPregunta pregunta = new EstructuraPregunta(1, "Pregunta 1", 1, respuesta);
+            Run.Instance.PreguntasCargadas.Add(pregunta);
+            Interaccion.cambiarPuntaje(1, "respuesta");
+            Assert.Equals(Interaccion.PUNTUACION_FINAL, 1);
+        }
+
+        [Test]
+        public void PruebaVerificarDecrementoPuntaje()
+        {
+            Interaccion Interaccion = new Interaccion();
+            EstructuraRespuesta respuesta = new EstructuraRespuesta("respuesta", "distractor", "distractor", "distractor");
+            EstructuraPregunta pregunta = new EstructuraPregunta(1, "Pregunta 1", 1, respuesta);
+            Run.Instance.PreguntasCargadas.Add(pregunta);
+            Interaccion.cambiarPuntaje(1, "distractor");
+            Assert.Equals(Interaccion.PUNTUACION_FINAL, 0);
         }
     }
 }
