@@ -82,7 +82,7 @@ namespace Juego_Preguntas.Controller
                     if (preg.Respuesta.Respuesta.Equals(respuesta))
                         return true;
                     else
-                        return true;
+                        return false;
                 }
             }
             if (!encontrada)
