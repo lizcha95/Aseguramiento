@@ -10,7 +10,6 @@ namespace Juego_Preguntas
     {
         public List<EstructuraPregunta> PreguntasCargadas;
         public List<EstructuraPregunta> PreguntasAMostrar;
-        public int CantidadPreguntas { get; set; }
 
         public Preguntas()
         {

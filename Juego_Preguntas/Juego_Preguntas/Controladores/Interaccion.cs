@@ -16,6 +16,12 @@ namespace Juego_Preguntas.Controller
 
         Preguntas PreguntasJuego = Run.Instance;
 
+        public Preguntas leerArchivo(string nombreArchivo)
+        {
+            //TODO implementar funcion de leer archivo y cargar preguntas
+            return new Preguntas();
+        }
+
         public void asignarPreguntasRandom(int cantidadPreguntas)
         {
             if ((cantidadPreguntas <= 0) || (PreguntasJuego.PreguntasCargadas.Count < cantidadPreguntas))
@@ -26,7 +32,14 @@ namespace Juego_Preguntas.Controller
 
         public string mostrarSiguientePregunta()
         {
-            return PreguntasJuego.PreguntasAMostrar[SIG_PREGUNTA].Pregunta;
+            if (PreguntasJuego.PreguntasAMostrar.Count < SIG_PREGUNTA)
+            { 
+                string preg = PreguntasJuego.PreguntasAMostrar[SIG_PREGUNTA].Pregunta;
+                ++SIG_PREGUNTA;
+
+                return preg;
+            }
+            throw new NullReferenceException("No hay mas preguntas a mostrar, fin de la lista.");
         }
 
         public bool verificarRespuesta(int idPregunta, int respuesta)

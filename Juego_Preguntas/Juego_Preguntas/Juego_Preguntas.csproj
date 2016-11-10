@@ -53,9 +53,7 @@
     <Compile Include="Modelos\EstructuraRespuesta.cs" />
     <Compile Include="Interface\IAdministracion.cs" />
     <Compile Include="Interface\IInteraccion.cs" />
-    <Compile Include="Interface\IJuego.cs" />
     <Compile Include="UI\MainClass.cs" />
-    <Compile Include="Controladores\Juego.cs" />
     <Compile Include="Modelos\Preguntas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controladores\Run.cs" />

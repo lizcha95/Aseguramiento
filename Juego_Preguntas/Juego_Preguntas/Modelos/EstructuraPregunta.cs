@@ -22,7 +22,7 @@ namespace Juego_Preguntas
             Respuestas = new List<EstructuraRespuesta>();
         }
 
-        public EstructuraPregunta(int id, string preg, string res, int dif, List<EstructuraRespuesta> dist)
+        public EstructuraPregunta(int id, string preg, int dif, List<EstructuraRespuesta> dist)
         {
             IdPregunta = id;
             Pregunta = preg;
