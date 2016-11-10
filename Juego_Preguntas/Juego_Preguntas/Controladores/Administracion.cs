@@ -61,16 +61,20 @@ namespace Juego_Preguntas.Controller
 
         public void eliminarPregunta(EstructuraPregunta PreguntaAEliminar)
         {
-            bool encontrada = false;
-            foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasCargadas)
+            if (existePregunta(PreguntaAEliminar))
             {
-                if (preg.IdPregunta.Equals(PreguntaAEliminar.IdPregunta))
+                int index = 0;
+                foreach (EstructuraPregunta preg in PreguntasJuego.PreguntasCargadas)
                 {
-                    encontrada = true;
-                    //TODO implementar eliminar pregunta
+                    if (preg.IdPregunta.Equals(PreguntaAEliminar.IdPregunta))
+                    {
+                        PreguntasJuego.PreguntasCargadas.RemoveAt(index);
+                        return;
+                    }
+                    ++index;
                 }
             }
-            if (!encontrada)
+            else
                 throw new KeyNotFoundException("No existe la pregunta");
         }
 

@@ -15,22 +15,24 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
     [TestFixture]
     public class TestClass
     {
-        [TestCase("preguntasSobreCiencia.cvs")]
-        [TestCase("preguntasSobreHistoria.cvs")]
-        [TestCase("preguntasSobreGuerrasCiviles.cvs")]
+        [TestCase("C:\\Temp\\preguntas.csv")]
         public void PruebaVerificarleerArchivo(string nombreArchivo)
         {
-            Interaccion Interaccion1 = new Interaccion();
-            Assert.Throws<ArgumentException>(() => Interaccion1.leerArchivo(nombreArchivo));
+            var Interaccion1 = Substitute.For<Interaccion>();
+            Interaccion1.leerArchivo(nombreArchivo);
+            Assert.IsNotNull(Run.Instance);
         }
 
-        [TestCase(3)]
-        [TestCase(0)]
-        [TestCase(8)]
+        [TestCase(6)]
+        [TestCase(2)]
+        [TestCase(9)]
         public void PruebaVerificarAsignarPreguntasRandom(int cantidadPreguntas)
         {
-            Interaccion Interaccion1 = new Interaccion();
-            Assert.Throws<Exception>(() => Interaccion1.asignarPreguntasRandom(cantidadPreguntas));
+            var Interaccion1 = Substitute.For<Interaccion>();
+            Interaccion1.leerArchivo("C:\\Temp\\preguntas.csv");
+            Interaccion1.asignarPreguntasRandom(cantidadPreguntas);
+            Assert.IsNotNull(Run.Instance.PreguntasAMostrar);
+
         }
 
         [Test]
@@ -88,13 +90,13 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
         [Test]
         public void PruebaVerificarEditarPregunta_PreguntaNoExisteEnLista_RetornaExcepcion()
         {
-            Administracion Admin = new Administracion();
+            var Admin = Substitute.For<Administracion>();
             EstructuraRespuesta RespuestaAEditar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
             EstructuraRespuesta RespuestaPrueba = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
             EstructuraPregunta PreguntaAEditar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAEditar);
             EstructuraPregunta PreguntaPrueba = new EstructuraPregunta(2, "Pregunta 2", 1, RespuestaPrueba);
             Run.Instance.PreguntasCargadas.Add(PreguntaPrueba);
-            Assert.Throws<KeyNotFoundException>(() => Admin.eliminarPregunta(PreguntaAEditar));
+            Assert.Throws<NullReferenceException>(() => Admin.editarPregunta(PreguntaAEditar.IdPregunta, PreguntaAEditar));
         }
 
         [Test]
@@ -153,7 +155,7 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
             Administracion admin = new Administracion();
             EstructuraRespuesta RespuestaAAgregar = new EstructuraRespuesta("Respuesta1", "Distractor1", "Distractor2", "Distractor3");
             EstructuraPregunta PreguntaAAgregar = new EstructuraPregunta(1, "Pregunta 1", 1, RespuestaAAgregar);
-            admin.agregarPregunta(PreguntaAAgregar);
+            Run.Instance.PreguntasCargadas.Add(PreguntaAAgregar);
             Assert.IsTrue(admin.verificarPreguntaExiste(PreguntaAAgregar));
         }
 
