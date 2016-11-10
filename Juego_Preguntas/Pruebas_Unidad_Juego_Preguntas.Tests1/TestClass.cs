@@ -32,28 +32,33 @@ namespace Pruebas_Unidad_Juego_Preguntas.Tests1
             Interaccion1.leerArchivo("C:\\Temp\\preguntas.csv");
             Interaccion1.asignarPreguntasRandom(cantidadPreguntas);
             Assert.IsNotNull(Run.Instance.PreguntasAMostrar);
-
         }
 
         [Test]
         public void PruebaVerificarMostrarSiguientePregunta()
         {
-            Interaccion Interaccion1 = new Interaccion();
-            Assert.Throws<NullReferenceException>(() => Interaccion1.mostrarSiguientePregunta());
+            Interaccion Interaccion1 = Substitute.For<Interaccion>();
+            Interaccion1.leerArchivo("C:\\Temp\\preguntas.csv");
+            Interaccion1.asignarPreguntasRandom(5);
+            string pregunta = Interaccion1.mostrarSiguientePregunta();
+            Assert.IsNotEmpty(pregunta);
         }
 
         [TestCase(1, "Cortázar")]
+        [TestCase(6, "Respuesta1")]
+        [TestCase(3, "Res 2")]
         public void PruebaVerificarRespuesta(int idPregunta, string respuesta)
         {
-            Interaccion Interaccion1 = new Interaccion();
-            Assert.Throws<IndexOutOfRangeException>(() => Interaccion1.verificarRespuesta(idPregunta, respuesta));
+            Interaccion Interaccion1 = Substitute.For<Interaccion>();
+            Interaccion1.leerArchivo("C:\\Temp\\preguntas.csv");
+            Assert.IsTrue(Interaccion1.verificarRespuesta(idPregunta, respuesta));
         }
 
-        [TestCase("preguntasSobreCiencia.cvs")]
+        [TestCase("preguntasSobreCiencia.txt")]
         public void PruebaVerificarExtensionArchivo(string nombreArchivo)
         {
-            Interaccion Interaccion1 = new Interaccion();
-            StringAssert.EndsWith(".cvs", nombreArchivo);
+            Interaccion Interaccion1 = Substitute.For<Interaccion>();
+            Assert.Throws<Exception>(() => Interaccion1.leerArchivo(nombreArchivo));
         }
 
 
